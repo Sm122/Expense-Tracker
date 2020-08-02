@@ -96,10 +96,10 @@
             console.log({ totalExpense });
             const someText = `Total Expense: ${totalExpense}`;
             headingElement.textContent = someText;
-
+           // localStorage.setItem("expenseItems",JSON.stringify(allExpenses));
+          // var allExpenses1=JSON.parse(localStorage.getItem("expenseItems"));
+           // console.log(allExpenses1);
             renderList(allExpenses);
-            
-                      
         }
         //controller functions
 
@@ -114,19 +114,19 @@
         //delete items
         function deleteItem(dateValue)
         {
-            const newArr = [];
+            
             console.log("the deleted item information",dateValue);
             for(let i =0;i<allExpenses.length;i++)
             {
-                if(allExpenses[i].moment.valueOf()!=dateValue)
-                newArr.push(allExpenses[i]);
+                if(allExpenses[i].moment.valueOf()==dateValue)
+                allExpenses.splice(i,1);
             }
-            renderList(newArr);
+            renderList(allExpenses);
         }
         //view layer
         function renderList(listArray)
         {
-            const allExpenseHTML=listArray.map( expense => createListItem(expense));
+            const allExpenseHTML=listArray.map(expense => createListItem(expense));
             const joinedAllExpensesHTML=allExpenseHTML.join('');
             expenseTableEl.innerHTML=joinedAllExpensesHTML;
             
