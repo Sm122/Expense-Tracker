@@ -29,7 +29,7 @@
         <div class="jumbotron mt-4">
             <div class="input-group mb-3">
                 <input
-                    type="text"
+                    type="number"
                     class="form-control"
                     id= "amount"
                     placeholder="Amount spent"
@@ -70,6 +70,8 @@
         const headingElement = document.querySelector("#heading");
         const inputEl  = document.querySelector("#amount");
         const inputDescEl = document.querySelector("#amountDesc");
+        var numbers = /^[0-9]+$/;
+        
         const expenseTableEl = document.querySelector("#expenseTable");
 
         // all expense at one place
@@ -77,6 +79,11 @@
         let totalExpense=0; 
         headingElement.textContent=totalExpense;     
         function addExpense(){
+            if(numbers.test(inputDescEl.value))
+        {
+            alert("please don't provide numbers in description");
+            return;
+        }
             const expenseItem = {};
             const textAmount = inputEl.value;
             const textDesc = inputDescEl.value;
