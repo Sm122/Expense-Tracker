@@ -27,14 +27,16 @@
     <div class="container-fluid bg-light" style="min-height: 100vh">
         <div class="container">
         <div class="jumbotron mt-4">
+            
             <div class="input-group mb-3">
                 <input
-                    type="number"
+                    type="number"              
                     class="form-control"
                     id= "amount"
                     placeholder="Amount spent"
                     aria-label="Amount spent"
                     aria-describedby="spent in rupee"
+                    required
                 />
                 <div class="input-group-append">
                     <span class="input-group-text" id="spent in rupee">₹</span>
@@ -51,11 +53,13 @@
                     placeholder="spent On"
                     aria-label="spent On"
                     aria-describedby="spent at"
+                    required
                 />
                 <div class="input-group-append">
                     <button class="btn btn-outline-primary" type="button" id="addbutton">Add</button>
                 </div>
             </div>
+            
         </div>
         <div>
             <ul class="list-group" id="expenseTable">
@@ -127,7 +131,15 @@
             for(let i =0;i<allExpenses.length;i++)
             {
                 if(allExpenses[i].moment.valueOf()==dateValue)
+                {
+                let delex = parseInt(allExpenses[i].amount);
+                totalExpense=totalExpense-delex;
                 allExpenses.splice(i,1);
+                console.log(totalExpense);
+                const someText = `Total Expense: ${totalExpense}`;
+                headingElement.textContent = someText;
+                
+                }
             }
             renderList(allExpenses);
         }
